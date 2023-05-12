@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserDaoJDBCImpl implements UserDao {
+    @Override
     public void createUsersTable() {
         try (Statement statement = Util.getSchemaStatement()) {
             statement.execute("CREATE SCHEMA IF NOT EXISTS projectdb");
@@ -27,6 +28,7 @@ public class UserDaoJDBCImpl implements UserDao {
         }
     }
 
+    @Override
     public void dropUsersTable() {
         try (Statement statement = Util.getConnection().createStatement()) {
             statement.execute("DROP TABLE IF EXISTS users");
@@ -35,6 +37,7 @@ public class UserDaoJDBCImpl implements UserDao {
         }
     }
 
+    @Override
     public void saveUser(String name, String lastName, byte age) {
         try (PreparedStatement statement = Util.getConnection().prepareStatement(
                 "INSERT INTO users (name, last_name, age) VALUES(?, ?, ?)")) {
@@ -47,6 +50,7 @@ public class UserDaoJDBCImpl implements UserDao {
         }
     }
 
+    @Override
     public void removeUserById(long id) {
         try (PreparedStatement statement = Util.getConnection().prepareStatement(
                 "DELETE FROM users WHERE id = ?")) {
@@ -57,6 +61,7 @@ public class UserDaoJDBCImpl implements UserDao {
         }
     }
 
+    @Override
     public List<User> getAllUsers() {
         try (Statement statement = Util.getConnection().createStatement()) {
             ResultSet resultSet = statement.executeQuery("SELECT name, last_name, age FROM users");
@@ -76,6 +81,7 @@ public class UserDaoJDBCImpl implements UserDao {
         return List.of();
     }
 
+    @Override
     public void cleanUsersTable() {
         try (Statement statement = Util.getConnection().createStatement()) {
             ResultSet resultSet = statement.executeQuery("SELECT id FROM users");
