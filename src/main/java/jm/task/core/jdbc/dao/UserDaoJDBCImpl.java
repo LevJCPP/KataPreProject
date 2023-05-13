@@ -10,12 +10,6 @@ import java.util.List;
 public class UserDaoJDBCImpl implements UserDao {
     @Override
     public void createUsersTable() {
-        try (Statement statement = Util.getSchemaStatement()) {
-            statement.execute("CREATE SCHEMA IF NOT EXISTS projectdb");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
         try (Statement statement = Util.getConnection().createStatement()) {
             statement.execute("""
                     CREATE TABLE IF NOT EXISTS users (
