@@ -19,7 +19,7 @@ public class Util {
     private static final String USER = "root";
     private static final String PASS = "root";
 
-    public static SessionFactory sessionFactory = null;
+    private static SessionFactory sessionFactory = null;
 
     public static SessionFactory getSessionFactory() {
         if (sessionFactory != null) {
