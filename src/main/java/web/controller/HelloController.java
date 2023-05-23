@@ -31,6 +31,6 @@ public class HelloController {
 		cars.add(new Car("car4", 456, "color4"));
 		cars.add(new Car("car5", 567, "color5"));
 		model.addAttribute("messages", cars.stream().limit(count == null ? 5 : count).toList());
-		return "index";
+		return "cars";
 	}
 }
