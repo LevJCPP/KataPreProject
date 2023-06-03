@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Users</title>
+</head>
+<body>
+    <div>
+        <table border="3">
+            <tr>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Gender</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+
+            <tr th:each="u : ${userList}">
+                <td th:utext="${u.getName()}">name</td>
+                <td th:utext="${u.getAge()}">age</td>
+                <td th:utext="${u.getGender()}">gender</td>
+
+                <td><a th:href="@{users/edit/{id}(id=${u.getId()})}">Edit</a></td>
+                <td>
+                    <form th:method="DELETE" th:action="@{/users/delete/{id}(id=${u.getId()})}">
+                        <input type="submit" value="Delete"/>
+                    </form>
+                </td>
+            </tr>
+        </table>
+
+        <br/>
+        <form th:method="POST" th:action="@{/users}" th:object="${user}">
+            <label for="name"> Enter name: </label>
+            <br/>
+            <input type="text" th:field="*{name}" id="name"/>
+            <br/>
+            <label for="age"> Enter age: </label>
+            <br/>
+            <input type="text" th:field="*{age}" id="age"/>
+            <br/>
+            <label for="gender"> Enter gender: </label>
+            <br/>
+            <input type="text" th:field="*{gender}" id="gender"/>
+            <br/>
+            <input type="submit" value="Add user">
+        </form>
+    </div>
+</body>
+</html>
